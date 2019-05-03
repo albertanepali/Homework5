@@ -24,8 +24,8 @@ class Movie extends Component {
             );
         };
 
-        const ReviewInfo = ({reviews}) => {
-            return reviews.map((review, i) =>
+        const ReviewInfo = ({Reviews}) => {
+            return Reviews.map((review, i) =>
                 <p key={i}>
                 <b>{review.username}</b> {review.review}
                     <Glyphicon glyph={'star'} /> {review.rating}
@@ -46,7 +46,7 @@ class Movie extends Component {
                         <ListGroupItem><ActorInfo actors={currentMovie.actors} /></ListGroupItem>
                         <ListGroupItem><h4><Glyphicon glyph={'star'} /> {currentMovie.avgRating} </h4></ListGroupItem>
                     </ListGroup>
-                    <Panel.Body><ReviewInfo reviews={currentMovie.reviews} /></Panel.Body>
+                    <Panel.Body><ReviewInfo reviews={currentMovie.Reviews} /></Panel.Body>
                 </Panel>
             );
         };
@@ -60,7 +60,7 @@ const mapStateToProps = (state, ownProps) => {
     console.log(ownProps);
     return {
         selectedMovie: state.movie.selectedMovie,
-        movieId: ownProps.match.params.movieId
+        movieid: ownProps.match.params.movieid
     }
 }
 
