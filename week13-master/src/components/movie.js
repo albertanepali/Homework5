@@ -14,7 +14,6 @@ class Movie extends Component {
         if (this.props.selectedMovie == null)
             dispatch(fetchMovie(this.props.movieId));
     }
-
     render() {
         const ActorInfo = ({actors}) => {
             return actors.map((actor, i) =>
@@ -24,14 +23,14 @@ class Movie extends Component {
             );
         };
 
-        const ReviewInfo = ({Reviews}) => {
-            return Reviews.map((review, i) =>
+        const ReviewInfo = ({reviews}) => {
+            return reviews.map((review, i) =>
                 <p key={i}>
-                <b>{review.username}</b> {review.review}
-                    <Glyphicon glyph={'star'} /> {review.rating}
+                    <b>{review.username}</b> {review.review}
+                    <Glyphicon glyph={'star'}/> {review.rating}
                 </p>
             );
-        }
+        };
 
         const DetailInfo = ({currentMovie}) => {
             if (!currentMovie) { // evaluates to true if currentMovie is null
@@ -40,27 +39,41 @@ class Movie extends Component {
             return (
                 <Panel>
                     <Panel.Heading>Movie Detail</Panel.Heading>
-                    <Panel.Body><Image className="image" src={currentMovie.imageUrl} thumbnail /></Panel.Body>
+                    <Panel.Body><Image className="image" src={currentMovie.imageUrl} thumbnail/></Panel.Body>
                     <ListGroup>
                         <ListGroupItem>{currentMovie.title}</ListGroupItem>
-                        <ListGroupItem><ActorInfo actors={currentMovie.actors} /></ListGroupItem>
-                        <ListGroupItem><h4><Glyphicon glyph={'star'} /> {currentMovie.avgRating} </h4></ListGroupItem>
+                        <ListGroupItem><ActorInfo actors={currentMovie.actors}/></ListGroupItem>
+                        <ListGroupItem><h4><Glyphicon glyph={'star'}/> {currentMovie.avgRating} </h4></ListGroupItem>
                     </ListGroup>
-                    <Panel.Body><ReviewInfo reviews={currentMovie.Reviews} /></Panel.Body>
+                    <Panel.Body><ReviewInfo reviews={currentMovie.reviews}/></Panel.Body>
+                    <Panel.Heading>Your Comment Here</Panel.Heading>
+                    <div className="form-group">
+                        <textarea rows="7" cols="50">
+                        </textarea>
+                    </div>
+                    <Panel.Heading>Rate Movie</Panel.Heading>
+                    <body>
+                    <h2>Star Rating</h2>
+                    <span className="fa fa-star checked"/>
+                    <span className="fa fa-star checked"/>
+                    <span className="fa fa-star checked"/>
+                    <span className="fa fa-star"/>
+                    <span className="fa fa-star"/>
+                    </body>
+                    <Panel.Heading>Submit Comment</Panel.Heading>
                 </Panel>
             );
         };
         return (
-            <DetailInfo currentMovie={this.props.selectedMovie} />
+            <DetailInfo currentMovie={this.props.selectedMovie}/>
         );
     }
 }
-
 const mapStateToProps = (state, ownProps) => {
     console.log(ownProps);
     return {
         selectedMovie: state.movie.selectedMovie,
-        movieid: ownProps.match.params.movieid
+        movieId: ownProps.match.params.movieId
     }
 }
 
