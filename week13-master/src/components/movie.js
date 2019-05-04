@@ -15,6 +15,7 @@ class Movie extends Component {
             dispatch(fetchMovie(this.props.movieId));
     }
 
+
     render() {
         const ActorInfo = ({actors}) => {
             return actors.map((actor, i) =>
